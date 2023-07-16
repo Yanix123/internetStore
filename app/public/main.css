@@ -1,0 +1,171 @@
+/* Обнуляем стили по умолчанию и устанавливаем базовый шрифт */
+body, h1, h2, p, ul, li {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Шапка навигации */
+header {
+  background-color: #f1f1f1;
+  padding: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+nav li.logo {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+nav li.right {
+  float: right;
+}
+
+nav li a {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-color: #ddd;
+  transition: background-color 0.3s ease;
+}
+
+nav li a:hover {
+  background-color: #aaa;
+  color: #fff;
+}
+
+/* Основное содержимое и футер */
+main, footer {
+  padding: 20px;
+}
+
+/* Дополнительные стили для страницы */
+body {
+  background-color: #f9f9f9;
+}
+
+main {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  margin: 20px 0;
+  padding: 30px;
+}
+
+footer {
+  text-align: center;
+  color: #888;
+}
+
+/* Медиа-запросы для адаптивного дизайна */
+
+/* Устройства с маленьким экраном (мобильные устройства) */
+@media only screen and (max-width: 600px) {
+  nav li.logo {
+    font-size: 20px;
+  }
+
+  nav li.right {
+    display: none;
+  }
+
+  nav li a {
+    padding: 6px 10px;
+  }
+
+  main {
+    margin: 10px 0;
+    padding: 20px;
+  }
+
+  .ads-container {
+    flex-direction: column;
+  }
+
+  .ad-container {
+    width: 100%;
+  }
+}
+
+/* Устройства с средним экраном (планшеты) */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  nav li.logo {
+    font-size: 22px;
+  }
+
+  main {
+    padding: 25px;
+  }
+
+  .ads-container {
+    justify-content: space-between;
+  }
+
+  .ad-container {
+    width: calc(50% - 20px);
+  }
+}
+
+/* Устройства с большим экраном (настольные компьютеры) */
+@media only screen and (min-width: 1025px) {
+  nav li.logo {
+    font-size: 26px;
+  }
+
+  main {
+    padding: 40px;
+  }
+
+  .ads-container {
+    justify-content: space-between;
+  }
+
+  .ad-container {
+    width: calc(25% - 20px);
+  }
+}
+
+/* Стили для объявлений */
+.ads-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ad-container {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ad-container a {
+  text-decoration: none;
+  color: #333;
+}
+
+.ad-container h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.ad-container p {
+  margin-bottom: 10px;
+}
+
+.ad-container img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}

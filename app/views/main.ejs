@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Главная страница</title>
+  <link rel="stylesheet" type="text/css" href="/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li class="logo">StoreName</li>
+        <% if (username) { %>
+          <li class="right">
+            <a href="#" id="logoutBtn">
+              <i class="fas fa-user"></i>
+              <%= username %>
+            </a>
+          </li>
+        <% } else { %>
+          <li class="right"><a href="reg/registr">Регистрация</a></li>
+          <li class="right"><a href="/log/login">Логин</a></li>
+        <% } %>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="ads-container">
+      <% if (data && data.length > 0) { %>
+        <% data.forEach(function(ad) { %>
+          <div class="ad-container">
+            <a href="#" target="_blank">
+              <h3><%= ad.adtHeader %></h3>
+              <p><%= ad.adtDes %></p>
+              <% if (ad.adtPhoto) { %>
+                <img src="<%= ad.adtPhoto %>" alt="Фото объявления">
+              <% } else { %>
+                <img src="/default-photo.jpg" alt="Дефолтное фото">
+              <% } %>
+            </a>
+            <!-- Другие детали объявления -->
+          </div>
+        <% }); %>
+      <% } else { %>
+        <p>Нет доступных объявлений.</p>
+      <% } %>
+    </div>
+  </main>
+
+  <footer>
+    <!-- Футер страницы -->
+  </footer>
+
+  <script>
+    document.getElementById("logoutBtn").addEventListener("click", function(event) {
+      event.preventDefault();
+      fetch("/main/logout", {
+        method: "GET"
+      })
+        .then(function(response) {
+          if (response.ok) {
+            window.location.href = "/log/login";
+          } else {
+            console.log("Failed to logout");
+          }
+        })
+        .catch(function(error) {
+          console.log("Error occurred:", error);
+        });
+    });
+  </script>
+</body>
+</html>

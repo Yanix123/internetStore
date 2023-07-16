@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Form</title>
+    <link rel="stylesheet" type="text/css" href="/reg.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Create User</h1>
+        <form>
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" name="firstName" id="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="secondName">Second Name:</label>
+                <input type="text" name="secondName" id="secondName" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <button type="submit" onclick="submitReq(event)">Create</button>
+        </form>
+
+           <!-- Поп-ап (модальное окно) -->
+    <div id="successPopup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <p>User registered successfully!</p>
+            <div class="button-container">
+                <a href="/log/login" class="btn">Go to Login</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <a href="/main" class="btn">Go to Homepage</a>
+    </div>
+</div>
+</body>
+<script>
+    function submitReq(event) {
+        event.preventDefault(); // Prevent the default form submission
+        const userFirstName = document.getElementById('firstName').value;
+    const userSecondName = document.getElementById('secondName').value;
+    const userEmail = document.getElementById('email').value;
+    const userPassword = document.getElementById('password').value;
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+        "userFirstName": userFirstName,
+        "userSecondName": userSecondName,
+        "userEmail": userEmail,
+        "userPassword": userPassword
+    });
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    fetch("http://localhost:3000/reg/registr", requestOptions)
+        .then(response => {
+            if (response.status === 200) {
+                showSuccessMessage();
+            }
+            return response.text();
+        })
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+}
+
+function showSuccessMessage() {
+    // Отображение поп-апа (модального окна)
+    const popup = document.getElementById('successPopup');
+    popup.style.display = 'flex';
+}
+
+</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Страница входа</title>
+    <link rel="stylesheet" type="text/css" href="/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Вход</h1>
+        <input type="text" id="username" name="username" placeholder="Имя пользователя" required>
+        <input type="password" id="password" name="password" placeholder="Пароль" required>
+        
+            <button type="submit" id = 'submit'>Войти</button>
+        </form>
+        <button class="button-secondary" onclick="redirectToMainPage()">Перейти на главную</button>
+ <!-- Button for redirection -->
+    </div>
+</body>
+
+<script>
+    document.getElementById("submit").onclick = function() {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+    
+        var raw = JSON.stringify({
+            "userEmail": document.getElementById("username").value,
+            "userPassword": document.getElementById("password").value
+        });
+    
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+    
+        fetch("http://localhost:3000/log/login", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    };
+    
+    function redirectToMainPage() {
+        window.location.href = "/main"; // Redirect to the main page URL
+    };
+    </script>
+</html>
